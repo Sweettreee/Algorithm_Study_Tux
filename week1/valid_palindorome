@@ -1,3 +1,63 @@
 https://neetcode.io/problems/is-palindrome/question?list=blind75
 
-언어는 자유 선택입니다.
+
+#include <iostream>
+#include <string>
+using namespace std;
+
+// 시간 복잡도: O(n)
+    // 이유:
+    // left와 right가 문자열 양쪽에서 가운데로 이동하면서
+    // 각 문자를 최대 한 번씩만 검사한다.
+    // 따라서 문자열 길이를 n이라고 하면 전체 수행 횟수는 최대 n번이다.
+
+class Solution {
+public:
+
+    // 알파벳 또는 숫자인지 검사
+    bool isAlphaNum(char c) {
+        if (c >= 'a' && c <= 'z') return true;
+        if (c >= 'A' && c <= 'Z') return true;
+        if (c >= '0' && c <= '9') return true;
+
+        return false;
+    }
+
+    // 대문자를 소문자로 변환
+    char toLowerCase(char c) {
+        if (c >= 'A' && c <= 'Z') {
+            return c + 32;
+        }
+
+        return c;
+    }
+
+    bool isPalindrome(string s) {
+
+        int left = 0;
+        int right = s.length() - 1;
+
+        while (left < right) {
+
+            // 왼쪽 특수문자 건너뜀
+            while (left < right && !isAlphaNum(s[left])) {
+                left++;
+            }
+
+            // 오른쪽 특수문자 건너뜀
+            while (left < right && !isAlphaNum(s[right])) {
+                right--;
+            }
+
+            // 비교
+            if (toLowerCase(s[left]) != toLowerCase(s[right])) {
+                return false;
+            }
+
+            left++;
+            right--;
+        }
+
+        return true;
+    }
+};
