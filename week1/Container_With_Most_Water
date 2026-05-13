@@ -8,6 +8,9 @@ public:
         int right=heights.size()-1;
         int result=0;
 
+        //시간 복잡도 : O(n)
+        //left와 right가 가운데로 이동하면서
+        //각 원소를 한 번씩 검사
         while(left<right){
             int width= right-left;
             int a= min(heights[left],heights[right]);
@@ -24,3 +27,5 @@ public:
         return result;
     }
 };
+
+//wt
