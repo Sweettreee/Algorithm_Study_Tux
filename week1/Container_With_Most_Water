@@ -1,3 +1,31 @@
 https://neetcode.io/problems/max-water-container/question?list=blind75
 
 언어는 자유 선택입니다.
+class Solution {
+public:
+    int maxArea(vector<int>& heights) {
+        int left=0;
+        int right=heights.size()-1;
+        int result=0;
+
+        //시간 복잡도 : O(n)
+        //left와 right가 가운데로 이동하면서
+        //각 원소를 한 번씩 검사
+        while(left<right){
+            int width= right-left;
+            int a= min(heights[left],heights[right]);
+
+            result= max(result,width*a);
+
+            if(heights[left]<heights[right]){
+                left++;
+            }
+            else{
+                right--;
+            }
+        }
+        return result;
+    }
+};
+
+//wt
