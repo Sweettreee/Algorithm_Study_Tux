@@ -1,4 +1,25 @@
 # Sliding Window
 https://neetcode.io/problems/buy-and-sell-crypto/question?list=blind75
 
+class Solution {
+public:
+    int maxProfit(vector<int>& prices) {
+        int l=0; //매수
+        int r=1; //매도
+        int maxP=0; //최대 이익
+
+        for (int i=0; i<prices.size(); i++) {
+            if (prices[l]<prices[r]) { // 이익 날 
+                int p=prices[r]-prices[l];
+                if (p>maxP) maxP=p;
+            }
+            else {
+                l=r; // 매수일을 매도일로
+            }
+            r++; // 다음 매도기간으로
+        }
+        return maxP;
+    }
+};
+
 https://neetcode.io/problems/longest-repeating-substring-with-replacement/question?list=blind75

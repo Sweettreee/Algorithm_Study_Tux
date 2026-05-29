@@ -1,3 +1,27 @@
 https://neetcode.io/problems/max-water-container/question?list=blind75
 
 언어는 자유 선택입니다.
+
+/* 시간 복잡도는 O(n)이다.
+ while문을 한 번 돌 때마다 포인터가 배열에서 한 칸씩 이동하기 때문에
+ while문은 전체적으로 n번 반복된다. 따라서 시간복잡도는 O(n)이다.
+ */
+
+class Solution {
+public:
+    int maxArea(vector<int>& heights) {
+        int left=0; // 왼쪽 포인터의 인덱스
+        int right=heights.size()-1; // 오른쪽 포인터의 인덱스
+        int max_extent;
+
+        while (left<right) {
+            int extent=(right-left)*min(heights[left], heights[right]);
+            max_extent=max(max_extent, extent);
+            
+            if (heights[left]<=heights[right]) left++;
+            else right--;
+        }
+
+        return max_extent;
+    }
+};
